@@ -18,6 +18,7 @@ model Producto {
   nombre      String
   categoria   String
   precio      Decimal
+  imgUrl      String?
 }
 
 model User {

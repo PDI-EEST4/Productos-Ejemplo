@@ -23,30 +23,25 @@ const productosController = {
   },
 
   crear: async (req, res) => {
-    const { nombre, categoria, precio } = req.body;
+    const { nombre, categoria, precio, imgUrl } = req.body;
 
     const productoNuevo = await prisma.producto.create({
-      data: {nombre, categoria, precio
-      }
+      data: {nombre, categoria, precio, imgUrl}
     })
 
     return res.json(productoNuevo)
   },
 
-  actualizar: (req, res) => {
+  actualizar: async (req, res) => {
     const { id } = req.params;
-    const { nombre, categoria, precio } = req.body;
+    const { nombre, categoria, precio, imgUrl } = req.body;
 
-    prisma.producto.update({
-      where: {
-        id: Number(id)
-      },
-      data: {
-        nombre, categoria,precio
-      }
+    const productoActualizado = await prisma.producto.update({
+      where: { id: Number(id) },
+      data: { nombre, categoria, precio, imgUrl }
     })
 
-    return res.json({message: 'Producto actualizado con exito'})
+    return res.json({message: 'Producto actualizado con exito', productoActualizado})
   },
 
   borrar: async (req, res) => {
