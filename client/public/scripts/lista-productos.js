@@ -18,7 +18,8 @@ const renderizarProductos = async () => {
     item.style = 'cursor:pointer';
     item.textContent = `${producto.nombre} - ${producto.precio}`
     item.addEventListener('click', () => {
-      alert(`Producto seleccionado: ${producto.nombre}`);
+      //Redireccionar 
+      window.location.href = `/client/productos/show.html?producto=${producto.id}`
     });
     listado.appendChild(item);
   });

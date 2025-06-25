@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <title>MiTiendita.com</title>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar shadow" style="background-color: rgb(242, 242, 8);">
+      <div class="container-fluid">
+        <h1 class="mb-0 fw-bold p-2 fs-3 text-white">MercadoPreso.com</h1>
+        <nav class="navbar navbar-expand-lg">
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" id="navbarOptions">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#sessionModal">Login</a>
+              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#registroModal">Registro</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </nav>
+  </header>
+  <main class="container mt-5">
+    <header>
+      <h2 id="titulo-producto"><!-- Titulo del producto --></h2>
+    </header>
+    <section id="info-producto">
+    </section>
+  </main>
+  <footer>
+
+  </footer>
+
+  <script src="./public/scripts/session.js"></script>
+  <script>
+    const idProducto = new URLSearchParams(window.location.search).get('producto');
+    fetch(`http://localhost:3000/api/productos/${idProducto}`)
+      .then(response => response.json())
+      .then(producto => {
+        const titulo = document.getElementById('titulo-producto');
+        const info = document.getElementById('info-producto');
+        titulo.textContent = producto.nombre;
+        info.innerHTML = `
+          <p>Precio: ${producto.precio}</p>
+          <img src="${producto.imgUrl}" alt="${producto.nombre}">
+        `
+      })
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
